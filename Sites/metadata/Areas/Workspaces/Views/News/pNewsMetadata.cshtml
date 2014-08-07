@@ -1,0 +1,267 @@
+﻿@model PagedList.IPagedList<FIFTHMVC.Models.NewsMetadata>
+@using PagedList.Mvc;
+@{
+    Layout = "";
+}
+<div style="margin-top: 10px;">
+    <div id="@(ViewBag.Target)_Loader" class="ajax-loader"></div>
+
+
+    @*@using (Html.BeginForm("edit", "datafield", new { area = "workspaces" }, FormMethod.Post, new { id = "frm_edit" }))
+        {*@
+
+    <table class="table" id="newsmetadatatable">
+        <tr style="line-height:46px;vertical-align:middle;height:36px;color: #511f7e; font-weight 400; background-color #ffffff; background: url('@Url.Content("~/Content/assets/thtail.png")');">
+            <th></th>
+            <th style="width:200px;">
+                ชื่อไฟล์
+            </th>
+            <th style="width:200px;">
+                Metada
+            </th>
+            <th>
+                รายละเอียด
+            </th>
+            <th>แก้ไข</th>
+            <th>
+                ลบ
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr style="text-align:center;font-weight:normal;color:#444444;">
+                <td>
+                    @if (item.MediaID.ToString().StartsWith("V"))
+                    {
+                        <img style="width:24px;" src="~/Content/assets/icon_video.png" />
+                    }
+                    else if (item.MediaID.ToString().StartsWith("P"))
+                    {
+                        <img style="width:24px;" src="~/Content/assets/icon_picture.png" />
+
+                    }
+                    else if (item.MediaID.ToString().StartsWith("S"))
+                    {
+                        <img style="width:24px;" src="~/Content/assets/icon_sound.png" />
+
+                    }
+                    else if (item.MediaID.ToString().StartsWith("O"))
+                    {
+                        <img style="width:24px;" src="~/Content/assets/icon_otherfiles.png" />
+                    }
+                </td>
+                <td>
+                    <span style="line-height:28px;">@item.MediaID</span>
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => item.DataFieldTitle, "", new { @class = "form-control input-sm", @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => item.Keyword, "", new { @class = "form-control input-sm", @readonly = true })
+                </td>
+                <td>
+
+                    <img src="~/Content/assets/edit.png" class="btn_edit_metadata"
+                         style="cursor:pointer;"
+                         sysid="@item.SysId" newsid="@item.NewsID" mediaid="@item.MediaID" />
+
+                </td>
+                <td>
+                    <a href="@Url.Action("edit", "metadata", new { id = item.SysId })">
+                        <img src="~/Content/assets/delete.png" />
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div id="@(ViewBag.TargetAction)_pager" style="margin-top:-20px;">
+        @Html.PagedListPager(
+        Model, page => Url.Action(ViewBag.TargetAction,
+            new
+            {
+                humanID = ViewBag.HumanID,
+                page = page
+            }
+        ),
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<",
+
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>",
+        }
+    )
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModalAddMetadata" tabindex="-1" role="dialog" aria-labelledby="myModalAddMetadataLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">ปิด</span></button>
+                <h4 class="modal-title" id="myModalAddMetadataLabel">เพิ่ม METADATA</h4>
+            </div>
+            <div class="modal-body">
+                loading...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-primary btnmodeladd">เพิ่ม</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModalEditMetadata" tabindex="-1" role="dialog" aria-labelledby="myModalEditMetadataLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">ปิด</span></button>
+                <h4 class="modal-title" id="myModalEditMetadataLabel">เพิ่ม METADATA</h4>
+            </div>
+            <div class="modal-body">
+                loading...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-primary btnmodelupdate">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $('#btn_add_metadata').click(function (e) {
+        $('.btnmodeladd').show();
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("create", "metadata")',
+            data: { id: '@ViewBag.NewsID', Media: '' },
+            success: function (result) {
+                $("#myModalAddMetadata .modal-body").html(result);
+                $('#myModalAddMetadata').modal('show');
+            },
+            OnFailure: function (data) {
+                alert("Error, please contact system administrator.");
+            }, cache: false
+        });
+    })
+
+
+    $('.btn_edit_metadata').click(function (e) {
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("edit", "metadata")',
+            data: { id: $(this).attr('sysid'), newsid: $(this).attr('newsid'), mediaid: $(this).attr('mediaid') },
+            success: function (result) {
+                $("#myModalEditMetadata .modal-body").html(result);
+                $('#myModalEditMetadata').modal('show');
+            },
+            OnFailure: function (data) {
+                alert("Error, please contact system administrator.");
+            }, cache: false
+        });
+    })
+
+
+    $('.btnmodeladd').click(function (e) {
+
+        var form = $('#myModalAddMetadata form').attr('id');
+
+        if ($('#' + form + ' #DataFieldId').val() != '' && $('#' + form + ' #Keyword').val() != '') {
+
+            var url = $('#' + form).attr('action');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: $('#' + form).serialize(),
+                success: function (result) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("pNewsMetadata", "news")',
+                        data: { id: '@ViewBag.NewsID' },
+                        success: function (result) {
+                            $("#divmetadata").html(result);
+                        },
+                        OnFailure: function (data) {
+                            alert("Error, please contact system administrator.");
+                        }, cache: false
+                    });
+
+                    //$('.btnmodeladd').hide();
+                    //$("#myModalAddMetadata .modal-body").html(result);
+                    //$('#myModalEditMetadata').modal('show');
+
+                    $('#myModalAddMetadata').modal('hide');
+                    $(this).modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+
+
+
+
+                },
+                OnFailure: function (data) {
+                    alert("Error, please contact system administrator.");
+                }, cache: false
+            });
+
+        } else {
+            alert("กรุณาตรวจสอบข้อมูลให้ครบ.");
+        }
+
+    });
+
+    $(function () {
+
+
+        $('#@(ViewBag.TargetAction)_pager').on('click', 'a', function () {
+
+            $('#@(ViewBag.Target)_Loader').css({
+                height: $('#@(ViewBag.Target)_Loader').parent().height(),
+                width: $('#@(ViewBag.Target)_Loader').parent().width()
+            });
+
+            $('#@(ViewBag.Target)_Loader').show();
+
+
+            $.ajax({
+                url: this.href,
+                type: 'POST',
+                data: { id: '@ViewBag.NewsID' },
+                cache: false,
+                success: function (result) {
+                    $('#@(ViewBag.Target)').html(result);
+                    $('#@(ViewBag.Target)_Loader').hide();
+                },
+                OnFailure: function (data) {
+                    $('#@(ViewBag.Target)_Loader').hide();
+                    alert("Error, please contact system administrator.");
+                }
+
+            });
+            return false;
+        });
+
+        $("#newsmetadatatable tr:even").css("background-color", "#f2e9fc");
+        $("#newsmetadatatable tr:odd").css("background-color", "#fdfdfb");
+
+    });
+
+</script>

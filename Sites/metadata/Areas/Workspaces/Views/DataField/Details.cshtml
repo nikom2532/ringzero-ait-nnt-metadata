@@ -1,0 +1,47 @@
+﻿@model FIFTHMVC.Models.tblMETADataField
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2></h2>
+
+<div>
+    <p class="h1title">ข้อมูล</p>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActive)
+        </dd>
+
+      
+    </dl>
+</div>
+<p>
+
+    <div class="form-group">
+        <div class="col-md-12" style="text-align:center;">
+            @Html.ActionLink("แก้ไข", "Edit", new { id = Model.SysId }, new { style = "min-width:100px;", @class = "bt btn" })
+            @Html.ActionLink("ยกเลิก", "index", null, new { style = "min-width:100px;", @class = "bt btn" })
+        </div>
+    </div>
+</p>

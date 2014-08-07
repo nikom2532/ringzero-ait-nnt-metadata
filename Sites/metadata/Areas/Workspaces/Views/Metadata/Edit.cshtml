@@ -1,0 +1,54 @@
+﻿@model FIFTHMVC.Models.tblMETAMapping
+@{
+    Layout = "";
+}
+
+<div>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+
+                @Html.HiddenFor(model => model.SysId)
+                @Html.HiddenFor(model => model.NewsId)
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-3">Metadata</label><span style="color:#ff0000;display:inline-block;position:absolute;font-size:1.2em;">*</span>
+                    <div class="col-md-9">
+                        <span class="select-menu" style="float:left;">
+                            <span>เลือก METADATA</span>
+                            @Html.DropDownListFor(m => m.DataFieldId, ViewData["modelDataField"] as SelectList, "เลือก METADATA", new { @class = "form-control" })
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-3">รายละเอียด</label><span style="color:#ff0000;display:inline-block;position:absolute;font-size:1.2em;">*</span>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.Keyword, new { @class = "form-control input-sm", style = "display:inline-block;" })
+                        @Html.ValidationMessageFor(model => model.Keyword)
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var selectmenu_txt = $('#DataFieldId').find("option:selected").text();
+        $('#DataFieldId').prev("span").text(selectmenu_txt);
+
+
+        $(".select-menu > select > option:eq(0)").attr("selected", "selected");
+        $(".select-menu > select").on("change", function () {
+            var selectmenu_txt = $(this).find("option:selected").text();
+            $(this).prev("span").text(selectmenu_txt);
+        });
+    });
+</script>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="528d2724f7264701b15ae5f386238341" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="PRDModel.SC03_User" Width="2" PointX="1.25" PointY="0.625" />
+        <EntityTypeShape EntityType="PRDModel.VW_NNT01_PublishNews" Width="1.5" PointX="6.375" PointY="9.75" />
+        <EntityTypeShape EntityType="PRDModel.VW_NNT03_Video" Width="1.5" PointX="8.375" PointY="9.75" />
+        <EntityTypeShape EntityType="PRDModel.VW_NNT08_NewsCategory" Width="2.375" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PRDModel.VW_NNT04_Picture" Width="1.5" PointX="4.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PRDModel.VW_NNT05_Voice" Width="1.5" PointX="4.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PRDModel.VW_NNT06_OtherFile" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PRDModel.NT02_NewsType" Width="1.5" PointX="6.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PRDModel.NT03_NewsSubType" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PRDModel.NT05_Policy" Width="1.5" PointX="8.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

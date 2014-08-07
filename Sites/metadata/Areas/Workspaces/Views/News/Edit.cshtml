@@ -1,0 +1,419 @@
+﻿@model FIFTHMVC.Models.VW_NNT02_RawNews
+@using Kendo.Mvc.UI
+@{
+    ViewBag.Title = "ข่าว " + Model.NewsID ;
+}
+
+<div style="display:inline-block;margin-top:10px;width:100%;">
+    <div id="divleft" style="width:280px;float:left;display:inline-block;">
+        <div>
+            <p class="h1title expandable">รายละเอียดการค้นหา</p>
+            <div>
+                <div class="form-horizontal" style="margin-left: auto; margin-right: auto;">
+                    <div class="form-group">
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">รหัสข่าว</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.NewsID, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ประเภทข่าว</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.CategoryTitle, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ประเภทข่าวย่อย</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.CategorySubTitle, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">นโยบาย</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.CategorySubTitle, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ประเด็นข่าว</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.CategorySubTitle, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">วันที่ข่าว</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.NewsDate, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ภาคเวลา</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.CategorySubTitle, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <p class="h1title expandable">เพิ่มเติม</p>
+            <div>
+                <div class="form-horizontal" style="margin-left: auto; margin-right: auto;">
+                    <div class="form-group">
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ที่มา</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.NewsID, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ผู้สื่อข่าว</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.Reporter, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ผู้ส่งข่าว</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.Editor, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">ช่างภาพ</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.Reporter, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">จังหวัด</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.Province, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">เขต / อำเภอ</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.CM07_AmpurName, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">แขวง / ตำบล</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.CM08_TumbonName, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-4 nolrpadding" style="text-align: right;">
+                                <label class="control-label">Tag</label>
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.TextBoxFor(model => model.Province, new { @class = "form-control input-sm", @readonly = true })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="divright" style="margin-left:300px;padding-left:10px;border-left:1px solid #e5e5e5;">
+        <div style="">
+            <p class="h1title expandable" style="margin-left:0px;">เนื้อหาข่าว</p>
+            <div style="margin-bottom:-40px;">
+                <div class="form-horizontal" style="margin-left:10px; margin-right: auto;">
+                    <div class="form-group" style="height:460px;">
+                        <div class="row row-xs">
+                            <div class="col-xs-3" style="text-align:left;">
+                                <label class="control-label">หัวข้อข่าว</label>
+                            </div>
+                        </div>
+                        <div class="row row-xs">
+                            <div class="col-xs-12">
+                                @Html.TextBoxFor(model => model.NewsTitle, new { @class = "form-control input-sm", style = "max-width:660px;", @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-3" style="text-align:left;">
+                                <label class="control-label">เนื้อหาข่าว</label>
+                            </div>
+                        </div>
+
+                        <div class="row row-xs">
+                            <div class="col-xs-12">
+                                <div style="background-color:#ffffff;border:1px solid #ccc;color:#333333;overflow-y:scroll;height:300px;padding:10px 6px 20px 6px;margin-right:12px;">
+                                    @if (Model.NewDesc != null)
+                                    {
+                                        @Html.Raw(Model.NewDesc)
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="">
+            <p class="h1title expandable" style="margin-left:0px;">ข้อมูลไฟล์แนบ</p>
+            <div style="margin-bottom:0px;">
+                <div class="form-group">
+                    <div class="row row-xs">
+                        <div class="col-xs-12">
+                            <div id="divfilepreview" style="text-align:center; background-color:#ffffff;border:1px solid #ccc; margin-bottom:10px;min-height:180px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-xs">
+                        <div class="col-xs-12">
+                            <div id="divfilelist">
+                                <ul class="nav nav-tabs" style="height:40px;">
+                                    <li class="active"><a href="#filevideo" data-toggle="tab"><img style="width:16px;" src="~/Content/assets/icon_video.png" /> วีดีโอ</a></li>
+                                    <li><a href="#filepicture" data-toggle="tab"><img style="width:16px;" src="~/Content/assets/icon_picture.png" /> รูปภาพ</a></li>
+                                    <li><a href="#filevoice" data-toggle="tab"><img style="width:16px;" src="~/Content/assets/icon_sound.png" /> เสียง</a></li>
+                                    <li><a href="#fileothers" data-toggle="tab"><img style="width:16px;" src="~/Content/assets/icon_otherfiles.png" /> อื่นๆ</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="filevideo"><div id="filevideo_Loader" style="height:100px;" class="ajax-loader"></div></div>
+                                    <div class="tab-pane fade" id="filepicture"><div id="filevideo_Loader" style="height:100px;" class="ajax-loader"></div></div>
+                                    <div class="tab-pane fade" id="filevoice"><div id="filevideo_Loader" style="height:100px;" class="ajax-loader"></div></div>
+                                    <div class="tab-pane fade" id="fileothers"><div id="filevideo_Loader" style="height:100px;" class="ajax-loader"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row row-xs">
+                        <div class="col-xs-12">
+                            <div id="divmetadata">
+                               
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div style="">
+            <p class="h1title expandable" style="margin-left:0px;">ประวัติการแก้ไขเนื้อข่าว</p>
+            <div style="margin-bottom:-40px;">
+                <div class="form-group" style="height:100px;">
+                    <div class="row row-xs">
+                        <div class="col-xs-12">
+                            <div id="divnewsversion">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+ 
+    $('.btn_add_metadata').click(function (e) {
+        e.preventDefault()
+        var MediaID = $(this).attr('id');
+        
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("create", "metadata")',
+            data: { id: '@ViewBag.NewsID', MediaID: MediaID },
+            success: function (result) {
+                $("#myModalAddMetadata .modal-body").html(result);
+                $('#myModalAddMetadata').modal('show');
+            },
+            OnFailure: function (data) {
+                alert("Error, please contact system administrator.");
+            }, cache: false
+        });
+
+    })
+
+
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+
+
+    $(function () {
+        $(".select-menu > select > option:eq(0)").attr("selected", "selected");
+        $(".select-menu > select").on("change", function () {
+            var selectmenu_txt = $(this).find("option:selected").text();
+            $(this).prev("span").text(selectmenu_txt);
+        });
+    });
+
+    $(".expandable").click(function () {
+
+        $header = $(this);
+        $content = $header.next();
+        $content.slideToggle(500, function () {
+        });
+
+    });
+
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("pNewsFileVideo", "news")',
+        data: { id: '@Model.NewsID' },
+        success: function (result) {
+            $("#filevideo").html(result);
+        },
+        OnFailure: function (data) {
+            alert("Error, please contact system administrator.");
+        }, cache: false
+    });
+
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("pNewsFilePicture", "news")',
+        data: { id: '@Model.NewsID' },
+        success: function (result) {
+            $("#filepicture").html(result);
+        },
+        OnFailure: function (data) {
+            alert("Error, please contact system administrator.");
+        }, cache: false
+    });
+
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("pNewsFileVoice", "news")',
+        data: { id: '@Model.NewsID' },
+        success: function (result) {
+            $("#filevoice").html(result);
+        },
+        OnFailure: function (data) {
+            alert("Error, please contact system administrator.");
+        }, cache: false
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("pNewsFileOthers", "news")',
+        data: { id: '@Model.NewsID' },
+        success: function (result) {
+            $("#fileothers").html(result);
+        },
+        OnFailure: function (data) {
+            alert("Error, please contact system administrator.");
+        }, cache: false
+    });
+
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("pNewsMetadata", "news")',
+        data: { id: '@Model.NewsID' },
+        success: function (result) {
+            $("#divmetadata").html(result);
+        },
+        OnFailure: function (data) {
+            alert("Error, please contact system administrator.");
+        }, cache: false
+    });
+
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("pNewsVersion", "news")',
+        data: { id: '@Model.NewsID' },
+        success: function (result) {
+            $("#divnewsversion").html(result);
+        },
+        OnFailure: function (data) {
+            alert("Error, please contact system administrator.");
+        }, cache: false
+    });
+
+
+    $(document).ready(function () {
+        $("#menu_newssearch").addClass("active");
+
+
+
+        $("form *").change(function () {
+            formmodified = 1;
+        });
+
+        formmodified = 0;
+
+        $(window).on('beforeunload', function () {
+            if (formmodified == 1) {
+                var msg = confirmExit();
+                return msg;
+            }
+
+        });
+        function confirmExit() {
+            jQuery.ajax({
+            });
+            return "ข้อมุลที่ทำการเปลี่ยนแปลง จะไม่ถูกทำการบันทึก, ท่านมั่นใจที่จะออกจากหน้านี้หรือไม?";
+        }
+    });
+
+</script>
+

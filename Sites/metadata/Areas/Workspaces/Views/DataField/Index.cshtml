@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "การจัดการ Data Field";
+}
+
+<div>
+    <p class="h1title expandable">META DATA FIELD</p>
+    <div id="divcreate" style="max-width: 1024px; min-height:60px;">
+        @Html.ActionLink("เพิ่มข้อมูล", "create", "datafield", new { @class = "btn bt", style = "min-width:100px;" })
+
+    </div>
+</div>
+
+
+
+<div>
+    <p class="h1title">META DATA LIST</p>
+    <div style="display:inline;">
+
+        <div style="width:100%; margin-left:auto; margin-right:auto;">
+
+            @using (Html.BeginForm("search", "DataField", FormMethod.Post, new { id = "searchform", @class = "form-horizontal", role = "form" }))
+            {
+                <div style="float:right; width:380px; margin-bottom: 8px;">
+                    <div class="col-xs-3" style="text-align: right;">
+                        <label class="control-label" style="">ค้นหา: </label>
+                    </div>
+                    <div class="input-group col-xs-9" style="text-align:right;">
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control input-sm" })
+                        <span class="input-group-btn">
+                            <button id="btnsearchsubmit" class="bt btn-sm" type="button">ค้นหา</button>
+                        </span>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+    <div id="divdatafieldresult" style="min-height:200px;">
+
+    </div>
+
+
+</div>
+
+<script>
+
+    $(".expandable").click(function () {
+
+        $header = $(this);
+        $content = $header.next();
+        $content.slideToggle(500, function () {
+        });
+
+    });
+
+
+
+    $(document).ready(function () {
+
+
+        //$('SearchString').bind("enterKey", function (e) {
+
+
+        //    return false;
+        //});
+
+
+        $('#searchform').bind("keyup keypress", function (e) {
+            var code = e.keyCode || e.which;
+            if (code == 13) {
+                e.preventDefault();
+
+                loading = '<br/><br/><br/><br/><span> Loading...</span>';
+                $("#divdatafieldresult").html(loading);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("search", "DataField")',
+                    data: $('#searchform').serialize(),
+                    success: function (result) {
+                        $("#divdatafieldresult").html(result);
+                    },
+                    OnFailure: function (data) {
+                        alert("Error, please contact system administrator.");
+                    }, cache: false
+                });
+
+                return false;
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("search", "DataField")',
+            data: $('#searchform').serialize(),
+            success: function (result) {
+                $("#divdatafieldresult").html(result);
+            },
+            OnFailure: function (data) {
+                alert("Error, please contact system administrator.");
+            }, cache: false
+        });
+
+
+        $("#btnsearchsubmit").click(function (e) {
+
+            $('#Loader').css({
+                height: $('#Loader').parent().height(),
+                width: $('#Loader').parent().width()
+            });
+
+
+            loading = '<br/><br/><br/><br/><span> Loading...</span>';
+            $("#divdatafieldresult").html(loading);
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("search", "DataField")',
+                data: $('#searchform').serialize(),
+                success: function (result) {
+                    $("#divdatafieldresult").html(result);
+                },
+                OnFailure: function (data) {
+                    alert("Error, please contact system administrator.");
+                }, cache: false
+            });
+
+        });
+
+
+
+        $("#menu_datafield").addClass("active");
+
+        $("tr:even").css("background-color", "#f2e9fc");
+        $("tr:odd").css("background-color", "#fdfdfb");
+    });
+</script>
+

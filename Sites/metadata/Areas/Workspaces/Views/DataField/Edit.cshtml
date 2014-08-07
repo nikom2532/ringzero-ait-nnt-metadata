@@ -1,0 +1,114 @@
+﻿@model FIFTHMVC.Models.tblMETADataField
+
+@{
+    ViewBag.Title = "แก้ไข Data Field";
+}
+
+<p class="h1title expandable">META DATA FIELD</p>
+@using (Html.BeginForm("edit", "datafield", new { area = "workspaces" }, FormMethod.Post, new { id = "frm_edit" }))
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.SysId)
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control input-sm", style = "max-width:660px;display:inline-block;" })<span style="color:#ff0000;display:inline-block;position:absolute;margin-left:2px;font-size:2em;">*</span>
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control input-sm", style = "max-width:660px;resize: none;" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label  col-md-2">เลือก</label>
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.isActive, new { @class = "form-control input-sm", style = "max-width:36px;" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12" style="text-align:center;">
+                <button class="bt btn" type="button" id="btn_save" style="min-width:100px;">&nbsp;&nbsp;&nbsp;บันทึก&nbsp;&nbsp;&nbsp;</button>
+                @Html.ActionLink("ยกเลิก", "index", null, new { style = "min-width:100px;", @class = "bt btn" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-12" style="text-align:center;">
+                <span style="color:#ff0000;display:inline-block;">* ข้อมูลที่จำเป็นต้องกรอก</span>
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+
+
+
+    $(document).ready(function () {
+        $("#menu_datafield").addClass("active");
+
+
+
+        $("#btn_save").click(function (e) {
+            var formValid = true;
+
+            if ($("#Title").val() == "") {
+                formValid = false;
+            }
+
+            if (formValid) {
+                //formmodified = 0;
+                $('button[type=button], input[type=button]').attr('disabled', true);
+                $("#frm_edit").submit();
+
+            } else {
+                alert("กรุณาตรวจสอบข้อมูล.")
+            }
+        });
+
+
+        $("#btn_save").dblclick(function (e) {
+            return false;
+        });
+
+        //$("form *").change(function () {
+        //    formmodified = 1;
+        //});
+
+        //formmodified = 0;
+
+        //$(window).on('beforeunload', function () {
+        //    if (formmodified == 1) {
+        //        var msg = confirmExit();
+        //        return msg;
+        //    }
+
+        //});
+        //function confirmExit() {
+        //    jQuery.ajax({
+        //    });
+        //    return "ข้อมุลที่ทำการเปลี่ยนแปลง จะไม่ถูกทำการบันทึก, ท่านมั่นใจที่จะออกจากหน้านี้หรือไม?";
+        //}
+    });
+</script>

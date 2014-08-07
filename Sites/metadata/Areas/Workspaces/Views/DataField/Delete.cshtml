@@ -1,0 +1,40 @@
+﻿@model FIFTHMVC.Models.tblMETADataField
+
+@{
+    ViewBag.Title = "ลบข้อมูล DATAFIELD";
+}
+
+<p class="h1title">ลบข้อมูล Datafield</p>
+<div>
+    <h3>คุณต้องการที่จะลบ Data Field นี้หรือไม่?</h3>
+    <dl class="dl-horizontal">
+
+            @Html.HiddenFor(model => model.SysId)
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-group">
+            <div class="col-md-12" style="text-align:center;">
+                <input type="submit" value="ลบ" class="bt btn" style="min-width:100px;" />
+                @Html.ActionLink("ยกเลิก", "index", null, new { style = "min-width:100px;", @class = "bt btn" })
+            </div>
+        </div>
+    }
+</div>

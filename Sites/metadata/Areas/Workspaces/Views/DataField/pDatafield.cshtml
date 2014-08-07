@@ -1,0 +1,104 @@
+﻿@model PagedList.IPagedList<FIFTHMVC.Models.tblMETADataField>
+@using PagedList.Mvc;
+@{
+    Layout = "";
+}
+
+<table class="table table-bordered table-condensed">
+    <tr style="line-height:46px;vertical-align:middle;height:36px;color: #511f7e; font-weight 400; background-color #ffffff; background: url('@Url.Content("~/Content/assets/thtail.png")');">
+        <th style="width:48px;">
+            เลือก
+        </th>
+        <th>
+            Metadata
+        </th>
+        <th style="width:48px;">แก้ไข</th>
+        <th style="width:48px;">ข้อมูล</th>
+        <th style="width:48px;">ลบ</th>
+    </tr>
+
+    @foreach (var item in Model.OrderBy(m=>m.Title))
+    {
+        <tr>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.isActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td style="text-align:center;">
+                <a href="@Url.Action("Edit", new { id = item.SysId })"><img src="~/Content/assets/edit.png" /></a>
+            </td>
+            <td style="text-align:center;">
+                <a href="@Url.Action("Details", new { id = item.SysId })"><img src="~/Content/assets/sh.png" /></a>
+            </td>
+
+            <td style="text-align:center;">
+                <a href="@Url.Action("Delete", new { id = item.SysId })"><img src="~/Content/assets/delete.png" /></a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div id="@(ViewBag.TargetAction)_pager">
+    @Html.PagedListPager(
+        Model,
+        page => Url.Action(ViewBag.TargetAction,
+            new
+            {
+                humanID = ViewBag.HumanID,
+                page = page
+            }
+        ),
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "prev",
+            LinkToNextPageFormat = "next",
+            LinkToLastPageFormat = ">>",
+        }
+    )
+</div>
+
+
+<script>
+
+    $(function () {
+
+        $('#@(ViewBag.TargetAction)_pager').on('click', 'a', function () {
+
+            $('#@(ViewBag.Target)_Loader').css({
+                height: $('#@(ViewBag.Target)_Loader').parent().height(),
+                width: $('#@(ViewBag.Target)_Loader').parent().width()
+            });
+
+            $('#@(ViewBag.Target)_Loader').show();
+
+            $.ajax({
+                url: this.href,
+                type: 'POST',
+                data: $('#searchform').serialize(),
+                cache: false,
+                success: function (result) {
+                    $('#@(ViewBag.Target)').html(result);
+                    $('#@(ViewBag.Target)_Loader').hide();
+                },
+                OnFailure: function (data) {
+                    $('#@(ViewBag.Target)_Loader').hide();
+                    alert("Error, please contact system administrator.");
+                }
+
+            });
+            return false;
+        });
+
+        $("tr:even").css("background-color", "#f2e9fc");
+        $("tr:odd").css("background-color", "#fdfdfb");
+    });
+
+</script>
+
+
+@*@Html.PagedListPager(Model, page => Url.Action("index", "datafield",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@

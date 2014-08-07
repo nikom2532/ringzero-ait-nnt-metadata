@@ -1,0 +1,52 @@
+﻿
+@model FIFTHMVC.Models.tblMETADataField
+
+@{
+    Layout = "";
+}
+
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label  col-md-2">ชื่อคำขยาย</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control input-sm", style = "max-width:660px;display:inline-block;" })<span style="color:#ff0000;display:inline-block;position:absolute;margin-left:2px;font-size:2em;">*</span>
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label  col-md-2">คำอธิบาย</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control input-sm", style = "max-width:660px;resize: none;" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-12" style="text-align:center;">
+                <input type="submit" value="&nbsp;&nbsp;&nbsp;บันทึก&nbsp;&nbsp;&nbsp;" class="bt btn" style="min-width:100px;" />
+                @Html.ActionLink("ยกเลิก", "index", null, new { style = "min-width:100px;", @class = "bt btn" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12" style="text-align:center;">
+                <span style="color:#ff0000;display:inline-block;">* ข้อมูลที่จำเป็นต้องกรอก</span>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
